@@ -1,14 +1,15 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react'
 import styles from './Button.module.css'
 import cn from 'classnames'
+import ArrowIcon from '@/assets/images/arrow.svg'
 
 interface Props extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
    children: React.ReactNode
    appearance: 'primary' | 'ghost',
-   className?: string
+   arrow?: 'right' | 'down' | 'none'
 }
 
-export const Button: FC<Props> = ({ children, appearance, className, ...props }) => {
+export const Button: FC<Props> = ({ children, appearance = 'primary', className, arrow = 'none', ...props }) => {
    return (
       <button
          {...props}
@@ -17,6 +18,9 @@ export const Button: FC<Props> = ({ children, appearance, className, ...props })
             [styles.ghost]: appearance === 'ghost'
          })}>
          {children}
+         {arrow !== 'none' && <span className={cn(styles.arrow, {
+            [styles.down]: arrow === 'down',
+         })}><ArrowIcon /></span>}
       </button>
    )
 }

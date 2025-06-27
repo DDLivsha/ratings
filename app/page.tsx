@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <div>
-      <Button appearance="primary">123</Button>
+      <Button appearance="ghost" arrow="right">123</Button>
     </div>
   );
 }

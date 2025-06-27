@@ -25,7 +25,29 @@
    border: 1px solid var(--gray-light);
 }
 
+.ghost svg {
+   transition: all .2s ease;
+}
+
 .ghost:hover {
    background-color: var(--primary);
    color: var(--white);
+}
+
+.ghost:hover svg {
+   fill: var(--white);
+}
+
+.arrow {
+   display: inline-block;
+   margin-left: 10px;
+   transition: all .2s ease;
+}
+
+.down {
+   transform: rotate(90deg);
+}
+
+.primary svg {
+   fill: var(--white);
 }
