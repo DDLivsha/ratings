@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> { }
 
-const Header: FC<Props> = ({ className, ...props }) => {
+const Header: FC<Props> = ({ ...props }) => {
    return (
       <div {...props}>
          Header

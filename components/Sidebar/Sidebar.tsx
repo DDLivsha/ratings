@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> { }
 
-const Sidebar: FC<Props> = ({ className, ...props }) => {
+const Sidebar: FC<Props> = ({ ...props }) => {
    return (
       <div {...props}>
          Sidebar

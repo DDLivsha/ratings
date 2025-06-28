@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> {
    children: React.ReactNode,
-   size: 's' | 'm' | 'l'
+   size?: 's' | 'm' | 'l'
 }
 const Typography: FC<Props> = ({ className, children, size = 'm', ...props }) => {
    return (
