@@ -12,6 +12,7 @@
    font-size: 18px;
    transition: all .2s ease;
    width: fit-content;
+   margin-top: 20px;
 }
 
 .firstLevel svg {
@@ -39,6 +40,14 @@
    line-height: 16px;
 }
 
+.secondLevelBlock {
+   display: none;
+}
+
+.secondLevelBlockOpened {
+   display: block;
+}
+
 .secondLevelBlockOpened:last-child {
    margin-bottom: 20px;
 }
@@ -64,4 +73,3 @@
 .thirdLevelActive, .thirdLevel:hover {
    color: var(--primary);
 }
-

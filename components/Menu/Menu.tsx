@@ -1,66 +1,54 @@
+'use client'
 import React, { FC, JSX } from 'react'
 import styles from './Menu.module.css'
 import cn from 'classnames'
 import { MenuItem, PageItem } from '@/interfaces/menu'
 import { getMenu } from '@/api/get-menu'
 import { TopLevelCategory } from '@/interfaces/top-page'
-import CoursesIcon from '@/assets/images/sidebar/courses.svg'
-import BooksIcon from '@/assets/images/sidebar/books.svg'
-import ServicesIcon from '@/assets/images/sidebar/services.svg'
-import ProductsIcon from '@/assets/images/sidebar/products.svg'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { firstLevelMenu, firstLevelMenuItem } from '@/helpers/helpers'
 
-interface firstLevelMenuItem {
-   route: string;
-   name: string;
-   icon: JSX.Element;
-   id: TopLevelCategory;
-}
+const Menu: FC = () => {
 
-const firstLevelMenu: firstLevelMenuItem[] = [
-   {
-      route: 'courses',
-      name: 'Курси',
-      icon: <CoursesIcon />,
-      id: TopLevelCategory.Courses
-   },
-   {
-      route: 'services',
-      name: 'Послуги',
-      icon: <ServicesIcon />,
-      id: TopLevelCategory.Services
-   },
-   {
-      route: 'books',
-      name: 'Книги',
-      icon: <BooksIcon />,
-      id: TopLevelCategory.Books
-   },
-   {
-      route: 'products',
-      name: 'Продукти',
-      icon: <ProductsIcon />,
-      id: TopLevelCategory.Products
+   const pathname = usePathname();
+   const [menu, setMenu] = React.useState<MenuItem[]>([])
+   const firstCategoryItem = firstLevelMenu.find((item) => item.route == pathname.split('/')[1])
+
+   React.useEffect(() => {
+      async function loadMenu() {
+         if (firstCategoryItem) {
+            setMenu([])
+            const menu = await getMenu(firstCategoryItem?.id)
+            setMenu(menu)
+         }
+      }
+      loadMenu()
+   }, [firstCategoryItem?.id])
+
+   const openSecondLevel = (secondCategory: string) => {
+      setMenu(menu.map(m => {
+         if (m._id.secondCategory == secondCategory) {
+            m.isOpened = !m.isOpened
+         }
+         return m
+      }))
    }
-]
-
-const Menu: FC = async () => {
-
-   const menu: MenuItem[] = await getMenu(0);
 
    const buildFirstLevel = () => {
       return (
          <>
             {firstLevelMenu.map((item) => (
                <div key={item.route}>
-                  <a href={`/${item.route}`}>
+                  <Link href={`/${item.route}`}>
                      <div className={cn(styles.firstLevel, {
-                        [styles.firstLevelActive]: item.id == TopLevelCategory.Courses
+                        [styles.firstLevelActive]: item.id == firstCategoryItem?.id
                      })}>
                         {item.icon}
                         <span>{item.name}</span>
                      </div>
-                  </a>
-                  {item.id == TopLevelCategory.Courses && buildSecondLevel(item)}
+                  </Link>
+                  {item.id == firstCategoryItem?.id && buildSecondLevel(item)}
                </div>
             ))}
          </>
@@ -71,16 +59,21 @@ const Menu: FC = async () => {
       return (
          <div className={styles.secondBlock}>
             {
-               menu.map((m) => (
-                  <div key={m._id.secondCategory}>
-                     <div className={styles.secondLevel}>{m._id.secondCategory}</div>
-                     <div className={cn(styles.secondLevelBlock, {
-                        [styles.secondLevelBlockOpened]: m.isOpened
-                     })}>
-                        {buildThirdLevel(m.pages, menuItem.route)}
+               menu.map((m) => {
+                  if (m.pages.map(p => p.alias).includes(pathname.split('/')[2])) {
+                     m.isOpened = true
+                  }
+                  return (
+                     <div key={m._id.secondCategory}>
+                        <div className={styles.secondLevel} onClick={() => openSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
+                        <div className={cn(styles.secondLevelBlock, {
+                           [styles.secondLevelBlockOpened]: m.isOpened
+                        })}>
+                           {buildThirdLevel(m.pages, menuItem.route)}
+                        </div>
                      </div>
-                  </div>
-               ))
+                  )
+               })
             }
          </div>
       )
@@ -89,11 +82,11 @@ const Menu: FC = async () => {
    const buildThirdLevel = (pages: PageItem[], route: string) => {
       return (
          pages.map(p => (
-            <a key={p._id} href={`/${route}/${p.alias}`} className={cn(styles.thirdLevel, {
-               [styles.thirdLevelActive]: false
+            <Link key={p._id} href={`/${route}/${p.alias}`} className={cn(styles.thirdLevel, {
+               [styles.thirdLevelActive]: pathname === `/${route}/${p.alias}`
             })}>
                {p.category}
-            </a>
+            </Link>
          ))
       )
    }
