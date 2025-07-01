@@ -9,11 +9,13 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { firstLevelMenu, firstLevelMenuItem } from '@/helpers/helpers'
 
-const Menu: FC = () => {
 
+
+const Menu: FC = () => {
    const pathname = usePathname();
-   const [menu, setMenu] = React.useState<MenuItem[]>([])
    const firstCategoryItem = firstLevelMenu.find((item) => item.route == pathname.split('/')[1])
+
+   const [menu, setMenu] = React.useState<MenuItem[]>([])
 
    React.useEffect(() => {
       async function loadMenu() {
