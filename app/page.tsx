@@ -6,14 +6,14 @@ import { MenuItem } from "@/interfaces/menu";
 
 export default async function Home() {
 
-  const menu: MenuItem[] = await getMenu(0);
+  // const menu: MenuItem[] = await getMenu(0);
 
   return (
     <div>
       <ul>
-        {menu.map((m) => (
+        {/* {menu.map((m) => (
           <li key={m._id.secondCategory}>{m._id.secondCategory}</li>
-        ))}
+        ))} */}
       </ul>
     </div>
   );
