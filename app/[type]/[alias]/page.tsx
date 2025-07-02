@@ -10,6 +10,8 @@ import Card from "@/components/Card/Card";
 import HhData from "@/components/HhData/HhData";
 import Advantages from "@/components/Advantages/Advantages";
 import Typography from "@/components/Typography/Typography";
+import Sort, { SortEnum } from "@/components/Sort/Sort";
+import SortWrapper from "@/components/SortWrapper/SortWrapper";
 
 export const metadata: Metadata = {
    title: "Courses",
@@ -28,9 +30,9 @@ export default async function Course({ params }: { params: { alias: string } }) 
          <div className={styles.title}>
             <Htag tag="h1">{page.title}</Htag>
             {products && <Tag color="gray" size="m">{products?.length}</Tag>}
-            <span>Sort</span>
+            <SortWrapper products={products || []} />
          </div>
-         <div>{products && products.map(p => <div key={p._id}>{p.title}</div>)}</div>
+         {/* <div>{products && products.map(p => <div key={p._id}>{p.title}</div>)}</div> */}
          <div className={styles.hhTitle}>
             <Htag tag="h2">Vacancies - {page.category}</Htag>
             {products && <Tag color="red" size="m">hh.com</Tag>}
