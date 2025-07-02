@@ -20,7 +20,8 @@ export const Button: FC<Props> = ({ children, appearance = 'primary', className,
          {children}
          {arrow !== 'none' && <span className={cn(styles.arrow, {
             [styles.down]: arrow === 'down',
-         })}><ArrowIcon /></span>}
+         })}
+         ><ArrowIcon /></span>}
       </button>
    )
 }

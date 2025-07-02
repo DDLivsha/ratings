@@ -4,6 +4,7 @@ import cn from 'classnames'
 import Menu from '../Menu/Menu'
 import Logo from '@/assets/images/logo.svg'
 import Link from 'next/link'
+import Search from '../Search/Search'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> { }
 
@@ -11,7 +12,7 @@ const Sidebar: FC<Props> = ({ className, ...props }) => {
    return (
       <div {...props} className={cn(styles.sidebar, className)}>
          <Link href={'/'}><Logo className={styles.logo} /></Link>
-         <div>Search</div>
+         <Search />
          <Menu />
       </div>
    )
