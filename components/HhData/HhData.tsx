@@ -5,7 +5,7 @@ import { HhData as HhDataProps, TopLevelCategory } from '@/interfaces/top-page'
 import Card from '../Card/Card'
 import RateIcon from '@/assets/images/rating-star.svg'
 import { usePathname } from 'next/navigation'
-import { firstLevelMenu } from '@/helpers/helpers'
+import { firstLevelMenu, priceUa } from '@/helpers/helpers'
 
 interface Props extends HhDataProps { }
 
@@ -25,7 +25,7 @@ const HhData: FC<Props> = ({ count, juniorSalary, middleSalary, seniorSalary }) 
          <Card className={styles.salary}>
             <div>
                <div className={styles.title}>Junior</div>
-               <div className={styles.salaryValue}>{juniorSalary}</div>
+               <div className={styles.salaryValue}>{priceUa(juniorSalary)}</div>
                <div className={styles.rate}>
                   <RateIcon className={styles.filled} />
                   <RateIcon />
@@ -34,7 +34,7 @@ const HhData: FC<Props> = ({ count, juniorSalary, middleSalary, seniorSalary }) 
             </div>
             <div>
                <div className={styles.title}>Middle</div>
-               <div className={styles.salaryValue}>{middleSalary}</div>
+               <div className={styles.salaryValue}>{priceUa(middleSalary)}</div>
                <div className={styles.rate}>
                   <RateIcon className={styles.filled} />
                   <RateIcon className={styles.filled} />
@@ -43,7 +43,7 @@ const HhData: FC<Props> = ({ count, juniorSalary, middleSalary, seniorSalary }) 
             </div>
             <div>
                <div className={styles.title}>Senior</div>
-               <div className={styles.salaryValue}>{seniorSalary}</div>
+               <div className={styles.salaryValue}>{priceUa(seniorSalary)}</div>
                <div className={styles.rate}>
                   <RateIcon className={styles.filled} />
                   <RateIcon className={styles.filled} />
