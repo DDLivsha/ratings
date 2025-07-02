@@ -3,18 +3,15 @@ import styles from "./page.module.css";
 import { Button, Htag } from "@/components";
 import { getMenu } from "@/api/get-menu";
 import { MenuItem } from "@/interfaces/menu";
+import Input from "@/components/Input/Input";
+import Textarea from "@/components/Textarea/Textarea";
 
 export default async function Home() {
 
-  // const menu: MenuItem[] = await getMenu(0);
-
   return (
     <div>
-      <ul>
-        {/* {menu.map((m) => (
-          <li key={m._id.secondCategory}>{m._id.secondCategory}</li>
-        ))} */}
-      </ul>
+      <Input />
+      <Textarea />
     </div>
   );
 }
