@@ -1,9 +1,5 @@
-.sortIcon {
-   display: none;
+.wrapper {
+   display: grid;
+   grid-template-columns: auto;
+   gap: 20px;
 }
-
-.active .sortIcon {
-   display: block;
-   margin-right: 8px;
-}
-

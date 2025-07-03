@@ -6,11 +6,8 @@ import { TopPageModel } from "@/interfaces/top-page";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
-import Card from "@/components/Card/Card";
 import HhData from "@/components/HhData/HhData";
 import Advantages from "@/components/Advantages/Advantages";
-import Typography from "@/components/Typography/Typography";
-import Sort, { SortEnum } from "@/components/Sort/Sort";
 import SortWrapper from "@/components/SortWrapper/SortWrapper";
 
 export const metadata: Metadata = {
@@ -30,9 +27,8 @@ export default async function Course({ params }: { params: { alias: string } }) 
          <div className={styles.title}>
             <Htag tag="h1">{page.title}</Htag>
             {products && <Tag color="gray" size="m">{products?.length}</Tag>}
-            <SortWrapper products={products || []} />
          </div>
-         {/* <div>{products && products.map(p => <div key={p._id}>{p.title}</div>)}</div> */}
+            <SortWrapper products={products || []} />
          <div className={styles.hhTitle}>
             <Htag tag="h2">Vacancies - {page.category}</Htag>
             {products && <Tag color="red" size="m">hh.com</Tag>}

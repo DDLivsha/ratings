@@ -4,6 +4,7 @@ import styles from './SortWrapper.module.css'
 import Sort, { SortEnum } from '../Sort/Sort'
 import { ProductModel } from '@/interfaces/product'
 import { sortReducer } from './sort.reducer'
+import Product from '../Product/Product'
 
 interface Props {
    products: ProductModel[]
@@ -17,11 +18,18 @@ const SortWrapper: FC<Props> = ({ products }) => {
       dispatchSort({ type: sort })
    }
 
+   const [isLoaded, setIsLoaded] = React.useState(false)
+
+   React.useEffect(() => {
+      setIsLoaded(true)
+   }, [])
+
    return (
-      <>
+      <div className={styles.wrapper}>
          <Sort sort={sort} setSort={setSort} />
-         <div>{sortedProducts && sortedProducts.map(p => <div key={p._id}>{p.title}</div>)}</div>
-      </>
+
+         <div>{sortedProducts && sortedProducts.map(p => <Product key={p._id} product={p} isLoaded={isLoaded} />)}</div>
+      </div>
    )
 }
 

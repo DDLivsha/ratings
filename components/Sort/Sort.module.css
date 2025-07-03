@@ -14,14 +14,16 @@
 
 .sort {
    display: grid;
-   grid-template-columns: repeat(2, auto);
+   grid-template-columns: 110px 95px;
    gap: 40px;
+   margin-top: 20px;
 }
 
 .sort span {
    display: inline-flex;
    align-items: center;
    cursor: pointer;
+   width: fit-content;
 }
 
 .sort span:not(.active) {

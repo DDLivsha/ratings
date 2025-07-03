@@ -5,5 +5,15 @@ module.exports = {
       use: ["@svgr/webpack"]
     });
     return config;
+  },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'old-images.hb.ru-msk.vkcs.cloud',
+        port: '',
+        pathname: '/**'}
+    ]
   }
 }
