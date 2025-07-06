@@ -10,7 +10,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 
 const Sidebar: FC<Props> = ({ className, ...props }) => {
    return (
-      <div {...props} className={cn(styles.sidebar, className)}>
+      <div className={cn(styles.sidebar, className)} {...props}>
          <Link href={'/'}><Logo className={styles.logo} /></Link>
          <Search />
          <Menu />
