@@ -1,3 +1,4 @@
+'use client'
 import React, { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
 import styles from './Product.module.css'
 import { ProductModel } from '@/interfaces/product'
@@ -5,18 +6,34 @@ import Card from '../Card/Card'
 import { priceUa } from '@/helpers/helpers'
 import Rating from '../Rating/Rating'
 import { Tag } from '../Tag/Tag'
-import { Button } from '../Button/Button'
 import Divider from '../Divider/Divider'
 import Image from 'next/image'
 import cn from 'classnames'
 import Reviews from '../Reviews/Reviews'
 import Buttons from './Buttons'
+import { useReviewOpen } from '@/helpers/zustand'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
    product: ProductModel
    isLoaded: boolean
 }
 const Product: FC<Props> = ({ product, isLoaded }) => {
+
+   const reviewRef = React.useRef<HTMLDivElement>(null)
+   const { productId, openReview, closeReview } = useReviewOpen()
+
+   const scrollToReview = () => {
+      openReview(product._id)
+
+      const timeout = setTimeout(() => {
+         reviewRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+         })
+      }, 100)
+      return () => clearTimeout(timeout)
+
+   }
 
    return (
       <>
@@ -52,7 +69,7 @@ const Product: FC<Props> = ({ product, isLoaded }) => {
             </div>
             <div className={styles.priceTitle}>price</div>
             <div className={styles.creditTitle}>credit</div>
-            <div className={styles.rateTitle}>{product.reviewCount} {product.reviewCount == 1 ? 'review' : 'reviews'}</div>
+            <div className={styles.rateTitle}><a href='#ref' onClick={scrollToReview}>{product.reviewCount} {product.reviewCount == 1 ? 'review' : 'reviews'}</a></div>
             <Divider className={styles.hr} />
             <div className={styles.description}>{product.description}</div>
             <div className={styles.feature}>
@@ -77,7 +94,7 @@ const Product: FC<Props> = ({ product, isLoaded }) => {
                <Buttons product={product} />
             </div>
          </Card>
-         <Reviews product={product} reviews={product.reviews || []} />
+         <Reviews ref={reviewRef} product={product} reviews={product.reviews || []} />
       </>
    )
 }

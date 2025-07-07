@@ -49,6 +49,18 @@
    cursor: pointer;
 }
 
+.error {
+   background: var(--red-light);
+   padding: 20px;
+   position: relative;
+   border-radius: 5px;
+   margin-top: 20px;
+}
+
+.error svg {
+   stroke: var(--red);
+}
+
 @media(max-width: 1100px) {
    .reviewForm {
       grid-template-columns: 1fr 1fr;

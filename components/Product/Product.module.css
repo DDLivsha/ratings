@@ -77,6 +77,10 @@
    line-height: 19px;
 }
 
+.rateTitle a {
+   color: var(--primary); 
+}
+
 .credit span {
    font-size: 14px;
    font-weight: 400;

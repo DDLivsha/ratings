@@ -15,11 +15,11 @@ const Buttons: FC<Props> = ({ product }) => {
    return (
       <>
          <Button appearance='primary'>Find out more</Button>
-         {product.reviews.length > 0 && <Button
+         <Button
             appearance='ghost'
             arrow={productId === product._id ? 'down' : 'right'}
             onClick={() => productId === product._id ? closeReview() : openReview(product._id)}
-         >Reviews</Button>}
+         >Reviews</Button>
       </>
    )
 

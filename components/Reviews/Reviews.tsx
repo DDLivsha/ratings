@@ -1,5 +1,5 @@
 'use client'
-import React, { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
+import React, { DetailedHTMLProps, FC, forwardRef, HTMLAttributes } from 'react'
 import styles from './Reviews.module.css'
 import { ProductModel, ReviewModel } from '@/interfaces/product'
 import Card from '../Card/Card'
@@ -15,13 +15,13 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
    product: ProductModel
    reviews: ReviewModel[]
 }
-const Reviews: FC<Props> = ({ product, reviews }) => {
+const Reviews: FC<Props> = forwardRef(({ product, reviews }, ref) => {
 
    const { productId } = useReviewOpen()
 
    return (
       <>
-         <Card color='blue' className={cn(styles.reviews, {
+         <Card ref={ref} color='blue' className={cn(styles.reviews, {
             [styles.opened]: productId === product._id,
             [styles.closed]: productId !== product._id
          })}>
@@ -48,6 +48,6 @@ const Reviews: FC<Props> = ({ product, reviews }) => {
          </Card>
       </>
    )
-}
+})
 
 export default Reviews

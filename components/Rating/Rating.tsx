@@ -1,15 +1,17 @@
 'use client'
-import React, { DetailedHTMLProps, FC, HTMLAttributes, JSX } from 'react'
+import React, { DetailedHTMLProps, FC, forwardRef, HTMLAttributes, JSX } from 'react'
 import styles from './Rating.module.css'
 import cn from 'classnames'
 import StarIcon from '@/assets/images/star.svg'
+import { FieldError } from 'react-hook-form'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
    isEditable?: boolean
    rating: number
    setRating?: (rating: number) => void
+   error?: FieldError
 }
-const Rating: FC<Props> = ({ className, isEditable = false, rating, setRating, ...props }) => {
+const Rating: FC<Props> = forwardRef(({ className, isEditable = false, rating, setRating, error, ...props }, ref: React.ForwardedRef<HTMLDivElement>) => {
 
    const [ratingArray, setRatingArray] = React.useState<JSX.Element[]>(new Array(5).fill(<></>))
 
@@ -29,7 +31,7 @@ const Rating: FC<Props> = ({ className, isEditable = false, rating, setRating, .
             <span
                className={cn(styles.star, {
                   [styles.filled]: i < currentRating,
-                  [styles.editable]: isEditable
+                  [styles.editable]: isEditable,
                })}
                key={i}
                onMouseEnter={() => isEditable && changeDisplay(i + 1)}
@@ -51,10 +53,11 @@ const Rating: FC<Props> = ({ className, isEditable = false, rating, setRating, .
    }, [rating])
 
    return (
-      <div {...props}>
+      <div className={cn(styles.ratingWrapper, className, { [styles.error]: error })} {...props} ref={ref}>
          {ratingArray.map((r, i) => (<span key={i}>{r}</span>))}
+         {error && <span className={styles.errorMessage}>{error.message}</span>}
       </div>
    )
-}
+})
 
 export default Rating

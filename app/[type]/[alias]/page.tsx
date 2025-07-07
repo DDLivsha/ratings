@@ -14,7 +14,7 @@ export const metadata: Metadata = {
    title: "Courses",
 }
 
-export default async function Course({ params }: { params: { alias: string } }) {
+export default async function Course({ params }: { params: { type: string, alias: string } }) {
    const page: TopPageModel | null = await getPage(params.alias);
    const products: ProductModel[] | null = page && await getProduct(page.category);
 
@@ -28,7 +28,7 @@ export default async function Course({ params }: { params: { alias: string } }) 
             <Htag tag="h1">{page.title}</Htag>
             {products && <Tag color="gray" size="m">{products?.length}</Tag>}
          </div>
-            <SortWrapper products={products || []} />
+         <SortWrapper products={products || []} />
          <div className={styles.hhTitle}>
             <Htag tag="h2">Vacancies - {page.category}</Htag>
             {products && <Tag color="red" size="m">hh.com</Tag>}
