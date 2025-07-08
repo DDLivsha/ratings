@@ -24,10 +24,12 @@ const Reviews: FC<Props> = forwardRef(({ product, reviews }, ref) => {
       visible: {
          opacity: 1,
          height: "auto",
+         overflow: "visible"
       },
       hidden: {
          opacity: 0,
          height: 0,
+         overflow: "hidden"
       }
    }
 

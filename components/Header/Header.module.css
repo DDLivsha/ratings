@@ -1,20 +1,32 @@
-.p {
-   font-family: var(--font-family);
-   margin: 0;
-   padding: 0;
+.header {
+   display: none;
+   grid-template-columns: 1fr 40px;
+   gap: 20px;
+   align-items: center;
+   margin: 15px 15px 0 15px;
 }
 
-.s {
-   font-size: 14px;
-   line-height: 24px;
+.mobileMenu {
+   position: fixed;
+   z-index: 1100;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: #f5f6f8;
+   overflow-y: scroll;
+   padding: 20px 10px;
 }
 
-.m {
-   font-size: 16px;
-   line-height: 24px;
+.menuClose {
+   position: fixed;
+   top: 10px;
+   right: 10px;
+   z-index: 1101;
 }
 
-.l {
-   font-size: 18px;
-   line-height: 29px;
+@media(max-width: 765px) {
+   .header {
+      display: grid;
+   }
 }
