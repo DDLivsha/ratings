@@ -1,5 +1,5 @@
 'use client'
-import React, { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
+import React, { DetailedHTMLProps, FC, forwardRef, HTMLAttributes } from 'react'
 import styles from './Product.module.css'
 import { ProductModel } from '@/interfaces/product'
 import Card from '../Card/Card'
@@ -12,12 +12,14 @@ import cn from 'classnames'
 import Reviews from '../Reviews/Reviews'
 import Buttons from './Buttons'
 import { useReviewOpen } from '@/helpers/zustand'
+import { motion } from 'framer-motion'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
    product: ProductModel
    isLoaded: boolean
 }
-const Product: FC<Props> = ({ product, isLoaded }) => {
+
+const Product = motion(forwardRef(({ product, isLoaded }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
 
    const reviewRef = React.useRef<HTMLDivElement>(null)
    const { productId, openReview, closeReview } = useReviewOpen()
@@ -37,7 +39,7 @@ const Product: FC<Props> = ({ product, isLoaded }) => {
 
    return (
       <>
-         <Card className={styles.product}>
+         <Card ref={ref} className={styles.product}>
             <div className={styles.logo}>
                <Image
                   className={styles.image}
@@ -97,6 +99,6 @@ const Product: FC<Props> = ({ product, isLoaded }) => {
          <Reviews ref={reviewRef} product={product} reviews={product.reviews || []} />
       </>
    )
-}
+}))
 
 export default Product

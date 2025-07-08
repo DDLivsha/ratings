@@ -28,7 +28,14 @@ const SortWrapper: FC<Props> = ({ products }) => {
       <div className={styles.wrapper}>
          <Sort sort={sort} setSort={setSort} />
 
-         <div>{sortedProducts && sortedProducts.map(p => <Product key={p._id} product={p} isLoaded={isLoaded} />)}</div>
+         <div>{sortedProducts && sortedProducts.map(p =>
+            <Product
+               layout
+               key={p._id}
+               product={p}
+               isLoaded={isLoaded}
+            />)}
+         </div>
       </div>
    )
 }

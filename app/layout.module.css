@@ -17,6 +17,7 @@
 
 .sidebar {
    grid-area: sidebar;
+   margin-left: -15px;
 }
 
 .footer {
