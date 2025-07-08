@@ -1,3 +1,8 @@
+.reviews {
+   padding: 30px;
+   overflow: hidden;
+}
+
 .review {
    display: grid;
    grid-template-columns: [start] auto 1fr auto auto [end];
@@ -6,17 +11,6 @@
    font-size: 14px;
    line-height: 24px;
    margin-bottom: 20px;
-}
-
-.closed {
-   overflow: hidden;
-   max-height: 0;
-   padding: 0;
-}
-
-.opened {
-   max-height: auto;
-   padding: 30px;
 }
 
 .description {

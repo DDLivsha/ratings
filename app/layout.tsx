@@ -4,6 +4,7 @@ import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Footer from "@/components/Footer/Footer";
 import styles from "./layout.module.css";
+import Up from "@/components/Up/Up";
 
 export const metadata: Metadata = {
    title: "Rating App",
@@ -25,9 +26,10 @@ export default function RootLayout({
          <body>
             <div className={styles.wrapper}>
                <Header className={styles.header} />
-                  <Sidebar className={styles.sidebar} />
-                  <div className={styles.body}>{children}</div>
+               <Sidebar className={styles.sidebar} />
+               <div className={styles.body}>{children}</div>
                <Footer className={styles.footer} />
+               <Up />
             </div>
          </body>
       </html>

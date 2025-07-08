@@ -10,6 +10,7 @@ import { format } from 'date-fns'
 import Rating from '../Rating/Rating'
 import Divider from '../Divider/Divider'
 import ReviewForm from '../ReviewForm/ReviewForm'
+import { motion } from 'framer-motion'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
    product: ProductModel
@@ -19,12 +20,24 @@ const Reviews: FC<Props> = forwardRef(({ product, reviews }, ref) => {
 
    const { productId } = useReviewOpen()
 
+   const variants = {
+      visible: {
+         opacity: 1,
+         height: "auto",
+      },
+      hidden: {
+         opacity: 0,
+         height: 0,
+      }
+   }
+
    return (
-      <>
-         <Card ref={ref} color='blue' className={cn(styles.reviews, {
-            [styles.opened]: productId === product._id,
-            [styles.closed]: productId !== product._id
-         })}>
+      <motion.div
+         variants={variants}
+         initial={productId === product._id ? 'visible' : 'hidden'}
+         animate={productId === product._id ? 'visible' : 'hidden'}
+      >
+         <Card ref={ref} color='blue' className={cn(styles.reviews)}>
             {reviews.map((item) =>
                <div key={item._id}>
                   <div className={styles.review}>
@@ -46,7 +59,7 @@ const Reviews: FC<Props> = forwardRef(({ product, reviews }, ref) => {
             )}
             <ReviewForm productId={product._id} />
          </Card>
-      </>
+      </motion.div>
    )
 })
 
