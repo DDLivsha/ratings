@@ -10,11 +10,27 @@ import HhData from "@/components/HhData/HhData";
 import Advantages from "@/components/Advantages/Advantages";
 import SortWrapper from "@/components/SortWrapper/SortWrapper";
 
-export const metadata: Metadata = {
-   title: "Courses",
+type Props = {
+   params: {
+      type: string
+      alias: string
+   }
 }
 
-export default async function Course({ params }: { params: { type: string, alias: string } }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   const page: TopPageModel | null = await getPage(params.alias);
+
+   return {
+      title: page?.metaTitle,
+      description: page?.metaDescription,
+      openGraph: {
+         title: page?.metaTitle,
+         description: page?.metaDescription,
+      },
+   }
+}
+
+export default async function Course({ params }: Props) {
    const page: TopPageModel | null = await getPage(params.alias);
    const products: ProductModel[] | null = page && await getProduct(page.category);
 
