@@ -18,6 +18,9 @@ const Sort: FC<Props> = ({ className, sort, setSort, ...props }) => {
    return (
       <div className={cn(styles.sort, className)} {...props}>
          <span
+            tabIndex={0}
+            role={'button'}
+            onKeyDown={(e) => e.key === 'Enter' && setSort(SortEnum.Rating)}
             onClick={() => setSort(SortEnum.Rating)}
             className={cn({
                [styles.active]: sort === SortEnum.Rating
@@ -27,6 +30,9 @@ const Sort: FC<Props> = ({ className, sort, setSort, ...props }) => {
             By rating
          </span>
          <span
+            tabIndex={0}
+            role={'button'}
+            onKeyDown={(e) =>  e.key === 'Enter' &&  setSort(SortEnum.Price)}
             onClick={() => setSort(SortEnum.Price)}
             className={cn({
                [styles.active]: sort === SortEnum.Price

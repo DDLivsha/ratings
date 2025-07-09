@@ -92,14 +92,18 @@ const Menu: FC = () => {
                   }
                   return (
                      <div key={m._id.secondCategory}>
-                        <div className={styles.secondLevel} onClick={() => openSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
+                        <div
+                           tabIndex={0}
+                           onKeyDown={(key) => key.code == 'Enter' && openSecondLevel(m._id.secondCategory)}
+                           className={styles.secondLevel}
+                           onClick={() => openSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
                         <motion.div
                            layout
                            variants={variants}
                            initial={m.isOpened ? 'visible' : 'hidden'}
                            animate={m.isOpened ? 'visible' : 'hidden'}
                            className={cn(styles.secondLevelBlock)}>
-                           {buildThirdLevel(m.pages, menuItem.route)}
+                           {buildThirdLevel(m.pages, menuItem.route, m.isOpened ?? false)}
                         </motion.div>
                      </div>
                   )
@@ -109,16 +113,19 @@ const Menu: FC = () => {
       )
    }
 
-   const buildThirdLevel = (pages: PageItem[], route: string) => {
+   const buildThirdLevel = (pages: PageItem[], route: string, isOpened: boolean) => {
       return (
          pages.map(p => (
             <motion.div
                key={p._id}
                variants={variantsChildren}
-               >
-               <Link href={`/${route}/${p.alias}`} className={cn(styles.thirdLevel, {
-                  [styles.thirdLevelActive]: pathname === `/${route}/${p.alias}`
-               })}>
+            >
+               <Link
+                  tabIndex={isOpened ? 0 : -1}
+                  href={`/${route}/${p.alias}`}
+                  className={cn(styles.thirdLevel, {
+                     [styles.thirdLevelActive]: pathname === `/${route}/${p.alias}`
+                  })}>
                   {p.category}
                </Link>
             </motion.div>

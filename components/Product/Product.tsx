@@ -32,7 +32,8 @@ const Product = motion(forwardRef(({ product, isLoaded }: Props, ref: React.Forw
             behavior: 'smooth',
             block: 'center'
          })
-      }, 100)
+         reviewRef.current?.focus()
+      }, 300)
       return () => clearTimeout(timeout)
 
    }
@@ -96,7 +97,7 @@ const Product = motion(forwardRef(({ product, isLoaded }: Props, ref: React.Forw
                <Buttons product={product} />
             </div>
          </Card>
-         <Reviews ref={reviewRef} product={product} reviews={product.reviews || []} />
+         <Reviews tabIndex={productId === product._id ? 0 : -1} ref={reviewRef} product={product} reviews={product.reviews || []} />
       </>
    )
 }))

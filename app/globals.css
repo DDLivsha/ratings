@@ -18,13 +18,13 @@ a {
 :root {
   --black: #3B434E;
   --gray-light: #ebebeb;
-  --gray-dark: #787d85;
+  --gray-dark: #6c7077;
   --white: #FFF;
-  --primary: #7653FC;
+  --primary: #7351f5;
   --primary-hover: #6344df;
   --red: #DE0000;
   --red-light: #ef8686;
-  --green: #1DC37E;
+  --green: #127a4f;
   --green-light: #C8F8E4;
   --font-family: 'Noto Sans', sans-serif;
 }

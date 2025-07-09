@@ -1,4 +1,3 @@
-
 .firstLevel {
    display: grid;
    grid-template-columns: 24px 1fr;
@@ -35,6 +34,7 @@
    font-weight: 300;
    font-size: 13px;
    line-height: 16px;
+   outline-offset: -1px;
 }
 
 .secondLevelBlock {
@@ -59,9 +59,11 @@
    transition: all .2s ease;
    white-space: nowrap;
    overflow: hidden;
-   text-overflow: ellipsis
+   text-overflow: ellipsis;
+   outline-offset: -1px;
 }
 
-.thirdLevelActive, .thirdLevel:hover {
+.thirdLevelActive,
+.thirdLevel:hover {
    color: var(--primary);
 }
